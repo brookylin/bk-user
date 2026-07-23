@@ -5,27 +5,34 @@
     @update:value="handleUpdate"
   >
     <template #option="{ option }">
-      <div
-        class="bk-timezone-picker-option"
-        :class="{ 'is-selected': option.label === value }"
-        @pointerdown="handleOptionPointerDown(option.label)"
+      <bk-option
+        v-bind="option"
+        :id="option.label"
+        :key="option.label"
+        :name="option.label"
       >
-        <span class="option-name">
-          {{ isBrowserTimezoneOption(option) ? `${t('浏览器时区')} ` : '' }}{{ option.label }}
-        </span>
-        <span
-          v-if="option.country || option.abbreviation"
-          class="option-country"
+        <div
+          class="bk-timezone-picker-option"
+          :class="{ 'is-selected': option.label === value }"
+          @pointerdown="handleOptionPointerDown(option.label)"
         >
-          {{ option.country || '' }}, {{ option.abbreviation || '' }}
-        </span>
-        <span
-          v-if="option.utc"
-          class="option-utc"
-        >
-          {{ option.utc }}
-        </span>
-      </div>
+          <span class="option-name">
+            {{ isBrowserTimezoneOption(option) ? `${t('浏览器时区')} ` : '' }}{{ option.label }}
+          </span>
+          <span
+            v-if="option.country || option.abbreviation"
+            class="option-country"
+          >
+            {{ option.country || '' }}, {{ option.abbreviation || '' }}
+          </span>
+          <span
+            v-if="option.utc"
+            class="option-utc"
+          >
+            {{ option.utc }}
+          </span>
+        </div>
+      </bk-option>
     </template>
   </DatePickerTimezonePicker>
 </template>
